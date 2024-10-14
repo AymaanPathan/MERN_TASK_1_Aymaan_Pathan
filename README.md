@@ -1,4 +1,4 @@
-Calculator App
+<h1>Calculator App<h1/>
 This is a simple calculator application built using React and Tailwind CSS. The app performs basic arithmetic operations such as addition, subtraction, multiplication, and division. It also utilizes a reusable button component to simplify code maintenance and extend the app's functionality.
 
 Features
