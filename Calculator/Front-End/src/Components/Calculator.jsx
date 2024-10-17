@@ -8,18 +8,22 @@ function Calculator() {
   const [prevNumber, setPrevNumber] = useState(null);
   const [operation, setOperation] = useState("");
   const [display, setDisplay] = useState("");
+  const [expression, setExpression] = useState("");
 
   const handleNumberClick = (e) => {
     const value = e.target.value;
     setDisplay((prev) => prev + value);
-    console.log(e);
+    setExpression((prev) => prev + value);
   };
 
   const handleOperationClick = (e) => {
     const selectedOperation = e.target.value;
-    setPrevNumber(parseFloat(display));
-    setDisplay("");
-    setOperation(selectedOperation);
+    if (display) {
+      setPrevNumber(parseFloat(display));
+      setExpression((prev) => prev + " " + selectedOperation + " ");
+      setDisplay("");
+      setOperation(selectedOperation);
+    }
   };
 
   const calculateResult = () => {
@@ -46,6 +50,7 @@ function Calculator() {
         return;
     }
 
+    setExpression(`${expression} = ${result}`);
     setDisplay(result.toString());
     setPrevNumber(null);
     setOperation("");
@@ -53,26 +58,32 @@ function Calculator() {
 
   const handleDeleteClick = () => {
     setDisplay((prev) => prev.slice(0, -1));
+    setExpression((prev) => prev.slice(0, -1));
   };
 
   return (
     <div className="main max-w-full flex flex-col items-center justify-center h-screen ">
-      {/* Top Section (Display) */}
-      <div className="top bg-[#FFFFFF]  text-4xl w-[26rem]  h-40 rounded-t-xl flex p-4 justify-end items-end">
+      <div className="top flex flex-col bg-[#FFFFFF]  text-4xl w-[26rem]  h-40 rounded-t-xl  p-4 justify-end items-end">
+        <div>
+          <p className="max-w-96 mb-12 text-sm text-gray-500 font-light overflow-hidden text-ellipsis whitespace-nowrap">
+            {expression || "0"}
+          </p>
+        </div>
         <p className="max-w-96 text-gray-800 font-light overflow-hidden text-ellipsis whitespace-nowrap">
           {isNaN(display) ? "Invalid Operation" : display || 0}
         </p>
       </div>
 
-      {/* Bottom Section (Buttons) */}
       <div className="flex">
         <div className="bottom grid grid-cols-3 bg-[#F6F6F6] w-80">
           <ExtrasBtn
-            ClearDisplay={() => setDisplay("")}
+            ClearDisplay={() => {
+              setDisplay("");
+              setExpression("");
+            }}
             DeleteNumbers={handleDeleteClick}
             handleOperation={handleOperationClick}
           />
-
           <Numbers onClick={handleNumberClick} />
           <AnswerBtn onClick={calculateResult} />
         </div>
