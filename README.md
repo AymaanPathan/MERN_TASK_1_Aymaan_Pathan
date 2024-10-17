@@ -4,7 +4,7 @@
 <h6>This is a simple calculator application built using React and Tailwind CSS. The app performs basic arithmetic operations such as addition, subtraction, multiplication, and division. It also utilizes a reusable button component to simplify code maintenance and extend the app's functionality.</h6>
 
 <h1>Live Link</h1>
-   https://mern-task-1-aymaan-pathan.vercel.app
+    https://mern-task-1-calculator.vercel.app/
   
 
 
