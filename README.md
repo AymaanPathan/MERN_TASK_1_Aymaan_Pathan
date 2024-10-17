@@ -38,7 +38,7 @@ Interactive Layout: The layout provides an intuitive user experience for smooth 
 2. Navigate to the project directory:
 
     ```bash
-    cd Front-End
+    cd .\Calculator\Front-End\
     ```
 
 3. Install dependencies:
